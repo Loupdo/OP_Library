@@ -43,8 +43,30 @@ function showMyLibrary(library) {
         btn=document.createElement('button')
         btn.classList.add("deletebtn")
         btn.innerText="Delete"
-        div.appendChild(btn)   
+        div.appendChild(btn)
+        readbtn= document.createElement('button')
+        readbtn.classList.add("readbtn")
+        readbtn.innerText="Read?"
+        div.appendChild(readbtn)
     });
+    deleteBtn=document.querySelectorAll(".deletebtn")
+    for (element of deleteBtn){
+        let t= [...deleteBtn].indexOf(element)
+        element.addEventListener("click", ()=>{
+        library.splice(t,1)
+        container.innerHTML=""
+        showMyLibrary(library)
+    })}
+    readBtn=document.querySelectorAll(".readbtn")
+    for (element of readBtn){
+        let i= [...readBtn].indexOf(element)
+        element.addEventListener("click", ()=>{
+            if(library[i].includes("not read yet")){
+                library[i]=library[i].replace("not read yet", "already read")
+            } else { alert("Already read")}
+        container.innerHTML=""
+        showMyLibrary(library)
+    })}
 }
 
 submitBtn.addEventListener("click", (event)=>{
